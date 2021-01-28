@@ -12,7 +12,7 @@ import {observer} from "mobx-react";
 class BoardListView extends Component {
 
     render() {
-        const { boards } = this.props;
+        const { boards, onSelectBoard } = this.props;
 
         return (
             <TableContainer component={Paper} >
@@ -28,7 +28,7 @@ class BoardListView extends Component {
                         {
                             Array.isArray(boards) && boards.length ?
                                 boards.map( b => (
-                                    <TableRow key={b.id} hover>
+                                    <TableRow key={b.id} hover onClick={() => onSelectBoard(b.id)}>
                                         <TableCell>{b.id}</TableCell>
                                         <TableCell>{b.name}</TableCell>
                                         <TableCell>{b.description}</TableCell>

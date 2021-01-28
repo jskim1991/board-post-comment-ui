@@ -5,8 +5,8 @@ import Button from "@material-ui/core/Button";
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 class LoginFormView extends Component {
-    render() {
 
+    render() {
         const { onSetUser, getUser } = this.props;
 
         return(

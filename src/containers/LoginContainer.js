@@ -16,7 +16,7 @@ class LoginContainer extends Component {
 
     onLogin(user) {
 
-        axios.get('api/user', {
+        axios.get('/api/user', {
             auth: {
                 username: user.username,
                 password: user.password

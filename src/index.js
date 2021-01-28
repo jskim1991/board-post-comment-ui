@@ -5,17 +5,15 @@ import App from './App';
 import {Provider} from "mobx-react";
 import boardStore from './store/BoardStore';
 import userStore from './store/UserStore';
+import postStore from './store/PostStore';
 import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
     <BrowserRouter>
-      <Provider boardStore = { boardStore } userStore = { userStore }>
+      <Provider boardStore = { boardStore } userStore = { userStore } postStore = { postStore }>
         <App />
       </Provider>
     </BrowserRouter>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

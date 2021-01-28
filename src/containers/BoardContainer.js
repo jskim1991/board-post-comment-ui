@@ -4,7 +4,7 @@ import axios from 'axios';
 import {inject, observer} from "mobx-react";
 import autobind from "autobind-decorator";
 
-@inject('boardStore', 'userStore')
+@inject('boardStore')
 @autobind
 @observer
 class BoardContainer extends Component {
@@ -15,9 +15,9 @@ class BoardContainer extends Component {
 
     loadBoards() {
 
-        const { authenticationHeader } = this.props.userStore;
+        // const { authenticationHeader } = this.props.userStore;
 
-        axios.get('api/board/all', {
+        axios.get('/api/board/all', {
             // withCredentials: true,
             // auth: {
             //     username: 'john',
@@ -36,14 +36,18 @@ class BoardContainer extends Component {
         this.props.boardStore.setBoards(boards);
     }
 
+    onSelectBoard(id) {
+        this.props.history.push('/posts/' +  id);
+    }
+
     render() {
-        console.log("RENDER");
         const { boards } = this.props.boardStore;
-        const { loggedIn } = this.props.userStore;
 
         return (
-            // loggedIn ? <BoardListView boards={boards}/> : <BoardListView />
-            <BoardListView boards={boards}/>
+            <BoardListView
+                boards={boards}
+                onSelectBoard={this.onSelectBoard}
+            />
         )
     }
 }

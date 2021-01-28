@@ -6,18 +6,29 @@ class BoardStore {
         makeObservable(this);
     }
 
-
     @observable
     _boards = [];
 
+    @observable
+    _board = {};
+
+    get board() {
+        return this._board;
+    }
+
     get boards() {
-        return toJS(this._boards);
+        return this._boards;
     }
 
     @action
     setBoards(boards) {
         this._boards = boards;
         console.log(toJS(this._boards));
+    }
+
+    @action
+    setBoard(board) {
+        this._board = board;
     }
 
 }
