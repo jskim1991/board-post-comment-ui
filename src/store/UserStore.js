@@ -7,7 +7,10 @@ class UserStore {
     }
 
     @observable
-    _user = {};
+    _user = {
+        'username': '',
+        'password': ''
+    };
 
     @observable
     _authenticationHeader = '';
@@ -16,6 +19,7 @@ class UserStore {
     _loggedIn = false;
 
     get user() {
+        console.log(toJS(this._user));
         return this._user;
     }
 

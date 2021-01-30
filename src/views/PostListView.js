@@ -7,12 +7,16 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import moment from "moment";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
 
 class PostListView extends Component {
 
     render() {
 
-        const { posts } = this.props;
+        const { posts, findCurrentUser, hidePost } = this.props;
+        const currentUser = findCurrentUser();
 
         return(
             <TableContainer component={Paper} >
@@ -23,8 +27,10 @@ class PostListView extends Component {
                             <TableCell align='center'>Title</TableCell>
                             <TableCell align='center'>Content</TableCell>
                             <TableCell align='center'>Author</TableCell>
-                            <TableCell align='center'>Created</TableCell>
-                            <TableCell align='center'>Modified</TableCell>
+                            <TableCell align='center'>Created Time</TableCell>
+                            <TableCell align='center'>Modified Time</TableCell>
+                            <TableCell align='center'>Modify</TableCell>
+                            <TableCell align='center'>Hide</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -38,6 +44,18 @@ class PostListView extends Component {
                                         <TableCell>{b.authorId}</TableCell>
                                         <TableCell>{moment(b.creationTime).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
                                         <TableCell>{moment(b.modifiedTime).format('YYYY-MM-DD HH:mm:ss')}</TableCell>
+                                        <TableCell>
+                                        <Button type='button' color='primary'
+                                                startIcon={<SaveIcon />}
+                                                disabled={ currentUser.username !== b.authorId }></Button>
+                                        </TableCell>
+                                        <TableCell>
+                                        <Button type='button' color='secondary'
+                                                startIcon={<DeleteIcon />}
+                                                disabled={ currentUser.username !== b.authorId }
+                                                onClick={() => hidePost(b) }
+                                        ></Button>
+                                        </TableCell>
                                     </TableRow>
                                 )) : <TableRow>Empty</TableRow>
                         }
